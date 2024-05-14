@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_todo/constants/colors.dart';
+import 'package:my_todo/model/todo.dart';
 
 class ToDoItem extends StatelessWidget {
-  const ToDoItem({Key? key}) : super(key: key);
+  final ToDo todoItem;
+  const ToDoItem({Key? key, required this.todoItem}) : super(key: key);
 
   Widget build(BuildContext context) {
     return Container(
@@ -12,27 +14,29 @@ class ToDoItem extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20)
         ),
-
+        // contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         tileColor: Colors.white,
         leading: Icon(
-          Icons.check_box,
+          todoItem.isDone? Icons.check_box: Icons.check_box_outline_blank,
           color: tdBlue
         ),
 
         title: Text(
-          "A todo item.",
+          todoItem.text!,
           style: TextStyle(
             fontSize: 16,
             color: tdBlack,
-            decoration: TextDecoration.lineThrough
+            decoration: todoItem.isDone? TextDecoration.lineThrough : null
           ),
         ),
 
         trailing: Container(
+          // padding: EdgeInsets.all(0),
+          // margin: EdgeInsets.symmetric(vertical: 12),
           height: 35,
           width: 35,
           decoration: BoxDecoration(
-            color: Colors.red,
+            color: tdRed,
             borderRadius: BorderRadius.circular(5)
           ),
           child: IconButton(
