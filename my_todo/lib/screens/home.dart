@@ -3,10 +3,17 @@ import 'package:my_todo/constants/colors.dart';
 import 'package:my_todo/model/todo.dart';
 import 'package:my_todo/widgets/todo_item.dart';
 
-class Home extends StatelessWidget {
+
+class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final todoList = ToDo.list();
+  final todoController = TextEditingController();
 
   // This widget is the root of your application.
   @override
@@ -59,7 +66,11 @@ class Home extends StatelessWidget {
                       ),
 
                       for(ToDo item in todoList)
-                        ToDoItem(todoItem: item)
+                        ToDoItem(
+                          todoItem: item, 
+                          onToDoChanged: _handleToDoChange, 
+                          onItemDelete: _handleItemDelete,
+                        )
                     ]
                   )
                 )
@@ -86,6 +97,7 @@ class Home extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: TextField(
+                      controller: todoController,
                       decoration: InputDecoration(
                         hintText: 'Add new todo item',
                         border: InputBorder.none
@@ -100,8 +112,11 @@ class Home extends StatelessWidget {
                   ),
                   child: ElevatedButton(
                     child: Text("+", style: TextStyle(fontSize: 20, color: Colors.white)),
-                    onPressed: () {},
+                    onPressed: () { 
+                      _handleItemAdd(todoController.text);
+                    },
                     style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                       backgroundColor: tdBlue,
                       minimumSize: Size(60, 60),
                       elevation: 10,
@@ -113,6 +128,29 @@ class Home extends StatelessWidget {
           )
       ])
     );
+  }
+
+  void _handleToDoChange(ToDo todo) {
+    setState(() {
+      todo.isDone = !todo.isDone;
+    });
+  }
+
+  void _handleItemDelete(String id) {
+    setState(() {
+      todoList.removeWhere((item) => item.id == id);
+    });
+  }
+
+  void _handleItemAdd(String todoText) {
+    setState(() {
+      todoList.add(ToDo(
+        id: DateTime.now().millisecondsSinceEpoch.toString(), 
+        text: todoText
+      ));
+      
+      todoController.clear();
+    });
   }
 
   Widget searchBox() {
