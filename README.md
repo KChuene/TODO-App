@@ -9,6 +9,6 @@ My very first flutter app, guided by Pradip Debnath.
 5. Updating UI State Dynamically
 6. Row and Column Widgets for Horizonatal and Vertical Layouts, Respectively.
 7. Handling Pressing, Tapping and text input Change events.
-8. Project Structure; Main, Screens, Widgets, Models and Assets
+8. Project Structure; Main, Screens, Widgets, Models, Assets and Constants
 9. Screen Structure; AppBar, Body
 10. Dart Programming Language
