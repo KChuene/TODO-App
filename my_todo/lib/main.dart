@@ -1,6 +1,6 @@
 //import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:my_todo/screens/home.dart';
+import './screens/home.dart';
 
 void main() {
   runApp(const MyApp());

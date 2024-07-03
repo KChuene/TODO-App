@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_todo/constants/colors.dart';
-import 'package:my_todo/model/todo.dart';
-import 'package:my_todo/widgets/todo_item.dart';
+import '../constants/colors.dart';
+import '../model/todo.dart';
+import '../widgets/todo_item.dart';
 
 
 class Home extends StatefulWidget {
